@@ -1,0 +1,1 @@
+exe{fun_call_performance}: {hxx cxx}{**} $libs

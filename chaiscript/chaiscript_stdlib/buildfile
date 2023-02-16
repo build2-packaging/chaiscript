@@ -1,0 +1,5 @@
+libs{chaiscript_stdlib}: cxx{**} ../lib{chaiscript}
+{
+  cxx.export.libs = ../lib{chaiscript}
+  bin.lib.version = "-$version.major.$version.minor.$version.patch"
+}

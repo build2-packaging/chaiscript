@@ -1,0 +1,4 @@
+include ../static_libs/
+exe{c_linkage_test}: {hxx cxx}{**} \
+  ../static_libs/libue{parser} \
+  ../static_libs/libue{stdlib}

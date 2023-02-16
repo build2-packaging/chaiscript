@@ -1,0 +1,1 @@
+exe{memory_leak_test}: {hxx cxx}{**} $libs

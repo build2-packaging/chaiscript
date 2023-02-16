@@ -1,0 +1,5 @@
+include ../static_libs/
+libs = \
+  ../static_libs/libue{parser} \
+  ../static_libs/libue{stdlib}
+exe{chai}: {hxx cxx}{**} $libs

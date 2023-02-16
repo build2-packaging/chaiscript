@@ -1,0 +1,7 @@
+project = chaiscript-samples
+
+using version
+using config
+using test
+# using install
+using dist

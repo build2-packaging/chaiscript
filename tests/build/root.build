@@ -1,0 +1,34 @@
+# Uncomment to suppress warnings coming from external libraries.
+#
+#cxx.internal.scope = current
+
+cxx.std = latest
+
+using cxx
+
+hxx{*}: extension = hpp
+ixx{*}: extension = ipp
+txx{*}: extension = tpp
+cxx{*}: extension = cpp
+
+# Assume headers are importable unless stated otherwise.
+#
+hxx{*}: cxx.importable = true
+
+# The test target for cross-testing (running tests under Wine, etc).
+#
+test.target = $cxx.target
+
+# Every executable in this directory is a test.
+#
+exe{*}: test = true
+
+# ChaiScript library will be imported by default.
+#
+import chaiscript = chaiscript%lib{chaiscript}
+import chaiscript_stdlib = chaiscript%lib{chaiscript_stdlib}
+
+# Type Definition for ChaiScript
+#
+define chai: file
+chai{*}: extension = chai

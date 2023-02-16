@@ -1,0 +1,1 @@
+exe{test_num_exceptions}: {hxx cxx}{**} $libs

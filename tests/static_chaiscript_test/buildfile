@@ -1,0 +1,1 @@
+exe{static_chaiscript_test}: {hxx cxx}{**} $chaiscript

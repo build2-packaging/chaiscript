@@ -1,0 +1,4 @@
+chai_module_path = $directory($chaiscript_stdlib)
+exe{multithreaded_test}: {hxx cxx}{**} $chaiscript
+# exe{multithreaded_test}: testscript: $chaiscript_stdlib ../chai{*} ../file{*.inc}
+exe{multithreaded_test}: $chaiscript_stdlib

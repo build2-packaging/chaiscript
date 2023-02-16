@@ -1,0 +1,3 @@
+./: manifest legal{LICENSE} doc{*.md}
+
+./: {*/ -build/ -test_num_exceptions/ -inheritance/ -factory/}

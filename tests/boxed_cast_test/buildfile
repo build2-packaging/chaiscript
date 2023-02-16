@@ -1,0 +1,1 @@
+exe{boxed_cast_test}: {hxx cxx}{**} $chaiscript

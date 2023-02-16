@@ -1,0 +1,2 @@
+./: libue{parser}: {hxx cxx}{chaiscript_parser} $chaiscript
+./: libue{stdlib}: {hxx cxx}{chaiscript_stdlib} $chaiscript

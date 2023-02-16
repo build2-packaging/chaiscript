@@ -1,0 +1,14 @@
+$out_root/
+{
+  include ./
+}
+
+switch ($name($import.target))
+{
+  case 'chaiscript'
+    export $out_root/$import.target
+  case 'chai'
+    export $out_root/chai/$import.target
+  case 'chaiscript_stdlib'
+    export $out_root/chaiscript_stdlib/$import.target
+}

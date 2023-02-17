@@ -1,2 +1,11 @@
-./: libue{parser}: {hxx cxx}{chaiscript_parser} ../lib{chaiscript}
-./: libue{stdlib}: {hxx cxx}{chaiscript_stdlib} ../lib{chaiscript}
+import chaiscript = lib{chaiscript}
+
+./: libue{parser}: {hxx cxx}{chaiscript_parser} $chaiscript
+{
+  cxx.export.libs = $chaiscript
+}
+
+./: libue{stdlib}: {hxx cxx}{chaiscript_stdlib} $chaiscript
+{
+  cxx.export.libs = $chaiscript
+}

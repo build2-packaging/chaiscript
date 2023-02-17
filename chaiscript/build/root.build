@@ -20,5 +20,61 @@ hxx{*}: cxx.importable = false
 #
 test.target = $cxx.target
 
-define chai: file
-chai{*}: extension = chai
+#
+#
+config [bool] config.chaiscript.multithread_support_enabled ?= true
+config [bool] config.chaiscript.dynload_enabled ?= true
+config [bool] config.chaiscript.build_modules ?= true
+config [bool] config.chaiscript.use_std_make_shared ?= false
+config [bool] config.chaiscript.use_gnu_readline ?= false
+
+default.export.poptions = # Empty
+default.export.coptions = # Empty
+default.export.loptions = # Empty
+default.export.libs = # Empty
+
+if ($config.chaiscript.use_std_make_shared)
+{
+  default.export.poptions += -DCHAISCRIPT_USE_STD_MAKE_SHARED
+}
+
+if! ($config.chaiscript.multithread_support_enabled)
+{
+  default.export.poptions += -DCHAISCRIPT_NO_THREADS
+}
+
+if! ($config.chaiscript.dynload_enabled)
+{
+  default.export.poptions += -DCHAISCRIPT_NO_DYNLOAD
+}
+
+switch ($cxx.target.class)
+{
+  case 'linux'
+  {
+    if ($config.chaiscript.multithread_support_enabled)
+    {
+      default.export.libs += -pthread
+    }
+    if ($config.chaiscript.dynload_enabled)
+    {
+      default.export.libs += -ldl
+    }
+  }
+
+  case 'macos'
+  {
+  }
+
+  case 'windows'
+  {
+    if ($cxx.id == 'msvc')
+    {
+      default.export.coptions += /W4 /w14545 /w34242 /w34254 /w34287 /w44263 /w44265 /w44296 /w44311 /w44826 /we4289 /w14546 /w14547 /w14549 /w14555 /w14619 /w14905 /w14906 /w14928 /w34062 /wd4503 \
+        /bigobj /permissive-
+    }
+    elif ($cxx.target.system == 'mingw32')
+    {
+    }
+  }
+}

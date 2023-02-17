@@ -1,5 +1,6 @@
-libs{chaiscript_stdlib}: cxx{**} ../lib{chaiscript}
+import chaiscript = lib{chaiscript}
+libs{chaiscript_stdlib}: cxx{**} $chaiscript
 {
-  cxx.export.libs = ../lib{chaiscript}
+  cxx.export.libs = $chaiscript
   bin.lib.version = "-$version.major.$version.minor.$version.patch"
 }

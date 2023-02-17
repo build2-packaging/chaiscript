@@ -1,1 +1,6 @@
 exe{static_chaiscript_test}: {hxx cxx}{**} $chaiscript
+
+# For this test, compilation is done without multithread support.
+# This is on purpose and we do not want to print this message.
+#
+cxx.poptions += -DCHAISCRIPT_NO_THREADS_WARNING

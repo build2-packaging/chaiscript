@@ -4,15 +4,14 @@
 doc{UPSTREAM.README.md}@./: install = doc/README.md
 doc{README.md}@./: install = doc/PACKAGE.README.md
 
-# ChaiScript Library
+# ChaiScript Header-Only Library
 #
 ./: lib{chaiscript}: chaiscript/hxx{**}
 {
-  cxx.export.poptions = $default.export.poptions "-I$src_root"
-  cxx.export.coptions = $default.export.coptions
-  cxx.export.loptions = $default.export.loptions
-  cxx.export.libs = $default.export.libs
+  cxx.export.poptions = "-I$src_root"
 }
 hxx{*}: install.subdirs = true
 
+# ChaiScript Standard Library Module and ChaiScript Interpreter
+#
 ./: static_libs/ chaiscript_stdlib/ chai/

@@ -2,7 +2,8 @@
 #
 #cxx.internal.scope = current
 
-cxx.std = latest
+# cxx.std = latest
+cxx.std = c++17
 
 using cxx
 
@@ -24,57 +25,88 @@ test.target = $cxx.target
 #
 config [bool] config.chaiscript.multithread_support_enabled ?= true
 config [bool] config.chaiscript.dynload_enabled ?= true
-config [bool] config.chaiscript.build_modules ?= true
-config [bool] config.chaiscript.use_std_make_shared ?= false
-config [bool] config.chaiscript.use_gnu_readline ?= false
+# config [bool] config.chaiscript.build_modules ?= true
+# config [bool] config.chaiscript.use_std_make_shared ?= false
+# config [bool] config.chaiscript.use_gnu_readline ?= false
 
-default.export.poptions = # Empty
-default.export.coptions = # Empty
-default.export.loptions = # Empty
-default.export.libs = # Empty
+# default.export.poptions = # Empty
+# default.export.coptions = # Empty
+# default.export.loptions = # Empty
+# default.export.libs = # Empty
 
-if ($config.chaiscript.use_std_make_shared)
+# if ($config.chaiscript.use_std_make_shared)
+#   default.export.poptions += -DCHAISCRIPT_USE_STD_MAKE_SHARED
+
+# if! ($config.chaiscript.multithread_support_enabled)
+#   default.export.poptions += -DCHAISCRIPT_NO_THREADS
+# else
+#   info Multithread support is enabled.
+
+# if! ($config.chaiscript.dynload_enabled)
+#   default.export.poptions += -DCHAISCRIPT_NO_DYNLOAD
+# else
+#   info Dynamic loading of ChaiScript modules is enabled.
+
+# switch ($cxx.target.class)
+# {
+#   case 'linux'
+#   {
+#     if ($config.chaiscript.multithread_support_enabled)
+#       default.export.libs += -pthread
+
+#     if ($config.chaiscript.dynload_enabled)
+#       default.export.libs += -ldl
+#   }
+
+#   case 'macos'
+#   {
+#   }
+
+#   case 'windows'
+#   {
+#     if ($cxx.id == 'msvc')
+#     {
+#       default.export.coptions += /W4 /w14545 /w34242 /w34254 /w34287 /w44263 /w44265 /w44296 /w44311 /w44826 /we4289 /w14546 /w14547 /w14549 /w14555 /w14619 /w14905 /w14906 /w14928 /w34062 /wd4503 \
+#         /bigobj /permissive-
+#     }
+#     elif ($cxx.target.system == 'mingw32')
+#     {
+#     }
+#   }
+# }
+
+# All the executables and libraries in this package
+# need to be compiled with the same options.
+# Therefore we provide a global setting of compile options.
+
+# cxx.coptions += -Wno-deprecated
+if ($cxx.id == 'clang')
+  cxx.coptions += -Wno-defaulted-function-deleted
+
+# Multithread Support
+#
+if ($config.chaiscript.multithread_support_enabled)
 {
-  default.export.poptions += -DCHAISCRIPT_USE_STD_MAKE_SHARED
+  text ChaiScript multithread support is enabled.
+  if ($cxx.target.system != 'win32-msvc')
+    cxx.libs += -pthread
+}
+else
+{
+  text ChaiScript multithread support is disabled.
+  cxx.poptions += -DCHAISCRIPT_NO_THREADS
 }
 
-if! ($config.chaiscript.multithread_support_enabled)
+# Dynamic Module Loading Support
+#
+if ($config.chaiscript.dynload_enabled)
 {
-  default.export.poptions += -DCHAISCRIPT_NO_THREADS
+  text ChaiScript dynamic module loading is enabled.
+  if ($cxx.target.system != 'win32-msvc')
+    cxx.libs += -ldl
 }
-
-if! ($config.chaiscript.dynload_enabled)
+else
 {
-  default.export.poptions += -DCHAISCRIPT_NO_DYNLOAD
-}
-
-switch ($cxx.target.class)
-{
-  case 'linux'
-  {
-    if ($config.chaiscript.multithread_support_enabled)
-    {
-      default.export.libs += -pthread
-    }
-    if ($config.chaiscript.dynload_enabled)
-    {
-      default.export.libs += -ldl
-    }
-  }
-
-  case 'macos'
-  {
-  }
-
-  case 'windows'
-  {
-    if ($cxx.id == 'msvc')
-    {
-      default.export.coptions += /W4 /w14545 /w34242 /w34254 /w34287 /w44263 /w44265 /w44296 /w44311 /w44826 /we4289 /w14546 /w14547 /w14549 /w14555 /w14619 /w14905 /w14906 /w14928 /w34062 /wd4503 \
-        /bigobj /permissive-
-    }
-    elif ($cxx.target.system == 'mingw32')
-    {
-    }
-  }
+  text ChaiScript dynamic module loading is disabled.
+  cxx.poptions += -DCHAISCRIPT_NO_DYNLOAD
 }

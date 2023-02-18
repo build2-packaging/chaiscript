@@ -1,4 +1,7 @@
 import chaiscript = lib{chaiscript}
+
+# Building a module for dynamic loading requires a shared library.
+#
 libs{chaiscript_stdlib}: cxx{**} $chaiscript
 {
   cxx.export.libs = $chaiscript

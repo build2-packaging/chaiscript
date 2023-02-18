@@ -1,5 +1,19 @@
+# Use precompiled utility libraries for faster compilation.
+#
 include ../static_libs/
 libs = \
   ../static_libs/libue{parser} \
   ../static_libs/libue{stdlib}
+
+# Use the GNU 'readline' library for line input when configured.
+#
+if ($config.chaiscript.use_readline)
+{
+  text ChaiScript use of readline library for interpreter is enabled.
+  import libs += readline%lib{readline}
+  cxx.poptions += -DREADLINE_AVAILABLE
+}
+else
+  text ChaiScript use of readline library for interpreter is disabled.
+
 exe{chai}: {hxx cxx}{**} $libs

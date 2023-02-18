@@ -1,4 +1,6 @@
 : 1
+location: libchaiscript/
+:
 location: chaiscript/
 :
 location: samples/

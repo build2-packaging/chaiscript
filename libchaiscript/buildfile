@@ -15,6 +15,5 @@ doc{README.md}@./: install = doc/PACKAGE.README.md
 }
 hxx{*}: install.subdirs = true
 
-# ChaiScript Standard Library Module and ChaiScript Interpreter
-#
-./: static_libs/ chaiscript_stdlib/ chai/
+./: tests/
+tests/: install = false

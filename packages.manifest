@@ -1,8 +1,8 @@
 : 1
 location: libchaiscript/
 :
+location: libchaiscript-samples/
+:
+location: libchaiscript-tests/
+:
 location: chaiscript/
-:
-location: samples/
-:
-location: tests/

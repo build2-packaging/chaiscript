@@ -1,0 +1,7 @@
+: 1
+summary: build2 Package Repository for ChaiScript
+
+:
+role: prerequisite
+location: https://pkg.cppget.org/1/stable
+# trust: ...

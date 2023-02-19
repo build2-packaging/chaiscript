@@ -2,6 +2,9 @@
 #
 #cxx.internal.scope = current
 
+# ChaiScript does not officially support C++20 and higher.
+# Using the latest C++ standard may result in warnings and errors.
+#
 # cxx.std = latest
 cxx.std = c++17
 

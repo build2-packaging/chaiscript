@@ -3,7 +3,7 @@
 
 !upstream
 
-!chaiscript/chaiscript
+!libchaiscript/chaiscript
 
 !*.h
 !*.hpp

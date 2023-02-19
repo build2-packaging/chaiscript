@@ -26,10 +26,19 @@ exe{*}: test = true
 
 # ChaiScript library will be imported by default.
 #
-import chaiscript = chaiscript%lib{chaiscript}
-import chaiscript_stdlib = chaiscript%lib{chaiscript_stdlib}
+import chaiscript = libchaiscript%lib{chaiscript}
+import chaiscript_stdlib = libchaiscript%lib{chaiscript_stdlib}
 
 # Type Definition for ChaiScript
 #
 define chai: file
 chai{*}: extension = chai
+
+# In C++20, using 'std::pod' is deprecated.
+#
+# cxx.coptions += -Wno-deprecated
+
+# Reduce noise from Clang.
+#
+if ($cxx.id == 'clang')
+  cxx.coptions += -Wno-defaulted-function-deleted

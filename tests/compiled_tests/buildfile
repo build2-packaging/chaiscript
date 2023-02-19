@@ -1,5 +1,0 @@
-include ../static_libs/
-exe{compiled_tests}: {hxx cxx}{**} \
-  ../static_libs/libue{parser} \
-  ../static_libs/libue{stdlib}
-

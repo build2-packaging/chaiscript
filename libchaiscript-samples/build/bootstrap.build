@@ -1,0 +1,11 @@
+project = libchaiscript-samples
+
+using version
+using config
+using test
+
+# The samples do not need to be installed.
+#
+# using install
+
+using dist

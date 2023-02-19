@@ -80,13 +80,13 @@ if ($cxx.id == 'clang')
 #
 if ($config.chaiscript.multithread_support_enabled)
 {
-  text ChaiScript multithread support is enabled.
+  # text ChaiScript multithread support is enabled.
   if ($cxx.target.system != 'win32-msvc')
     default.export.libs += -pthread
 }
 else
 {
-  text ChaiScript multithread support is disabled.
+  # text ChaiScript multithread support is disabled.
   default.export.poptions += -DCHAISCRIPT_NO_THREADS
 }
 
@@ -94,13 +94,13 @@ else
 #
 if ($config.chaiscript.dynload_enabled)
 {
-  text ChaiScript dynamic module loading is enabled.
+  # text ChaiScript dynamic module loading is enabled.
   if ($cxx.target.system != 'win32-msvc')
     default.export.libs += -ldl
 }
 else
 {
-  text ChaiScript dynamic module loading is disabled.
+  # text ChaiScript dynamic module loading is disabled.
   default.export.poptions += -DCHAISCRIPT_NO_DYNLOAD
 }
 

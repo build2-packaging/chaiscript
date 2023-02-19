@@ -16,8 +16,10 @@ package-url: https://github.com/build2-packaging/chaiscript/
 package-email: lyrahgames@mailbox.org
 build-warning-email: lyrahgames@mailbox.org
 
-tests: chaiscript-tests == $
-examples: chaiscript-samples == $
+# tests: chaiscript-tests == $
+# examples: chaiscript-samples == $
 
 depends: * build2 >= 0.15.0
 depends: * bpkg >= 0.15.0
+
+depends: libchaiscript == $

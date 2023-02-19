@@ -1,0 +1,11 @@
+# The single-header Catch2 library provided
+# by the ChaiScript repository may result in compiler errors.
+# Hence, we use the build2 package for Catch2 from cppget.org.
+#
+# The library is included by '#include "catch.hpp"'.
+# The file is provided as forwarding mechanism
+# to the file 'catch2/catch.hpp'
+#
+import catch2 = catch2%lib{catch2}
+
+exe{type_info_test}: {hxx cxx}{**} $chaiscript $catch2

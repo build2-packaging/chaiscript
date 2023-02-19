@@ -1,4 +1,4 @@
-import chaiscript = lib{chaiscript}
+import chaiscript = libchaiscript%lib{chaiscript}
 
 # Building a module for dynamic loading requires a shared library.
 #

@@ -1,1 +1,0 @@
-exe{type_info_test}: {hxx cxx}{**} $chaiscript

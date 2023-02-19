@@ -1,0 +1,3 @@
+./: manifest legal{LICENSE} doc{*.md}
+
+./: {*/ -build/ -scripts/ -multithreaded_test/}

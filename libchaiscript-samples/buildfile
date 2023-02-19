@@ -1,3 +1,6 @@
 ./: manifest legal{LICENSE} doc{*.md}
 
+# Raw string literal bug in build2 0.15.0
+# does not let us build all the samples.
+#
 ./: {*/ -build/ -test_num_exceptions/ -inheritance/ -factory/}

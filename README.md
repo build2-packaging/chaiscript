@@ -24,16 +24,17 @@
 ## Usage
 The dependency to the package `chaiscript` in your `manifest` file should look like the following.
 
+    depends: libchaiscript ^ 6.1.0
     depends: chaiscript ^ 6.1.0
 
 It provides several targets for importation.
 The header-only C++ library to use ChaiScript as an embedded language can be imported by the following declaration in the `buildfile`.
 
-    import chaiscript = chaiscript%lib{chaiscript}
+    import chaiscript = libchaiscript%lib{chaiscript}
 
 To import the dynamically loadable module which provides the standard library for a ChaiScript instance, do the following.
 
-    import chaiscript_stdlib += chaiscript%lib{chaiscript_stdlib}
+    import chaiscript_stdlib += libchaiscript%lib{chaiscript_stdlib}
 
 Also, using the `chai` interpreter for ChaiScript as build-time dependency with immediate importation is supported.
 

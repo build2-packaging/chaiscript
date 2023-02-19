@@ -30,7 +30,6 @@ config [bool] config.libchaiscript.multithread_support_enabled ?= true
 config [bool] config.libchaiscript.dynload_enabled ?= true
 # config [bool] config.libchaiscript.build_modules ?= true
 config [bool] config.libchaiscript.use_std_make_shared ?= false
-config [bool] config.libchaiscript.use_readline ?= true
 
 default.poptions = # Empty
 default.coptions = # Empty

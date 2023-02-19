@@ -27,7 +27,9 @@ config [bool] config.chaiscript.multithread_support_enabled ?= true
 config [bool] config.chaiscript.dynload_enabled ?= true
 # config [bool] config.chaiscript.build_modules ?= true
 config [bool] config.chaiscript.use_std_make_shared ?= false
-config [bool] config.chaiscript.use_readline ?= true
+
+config [bool] config.chaiscript.use_readline ?= \
+  ($cxx.target.class == 'linux')
 
 # switch ($cxx.target.class)
 # {

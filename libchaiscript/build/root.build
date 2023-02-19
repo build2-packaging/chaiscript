@@ -70,7 +70,7 @@ else
 if ($config.libchaiscript.dynload_enabled)
 {
   # text ChaiScript dynamic module loading is enabled.
-  if ($cxx.target.system != 'win32-msvc')
+  if ($cxx.target.class != 'windows')
     default.export.libs += -ldl
 }
 else

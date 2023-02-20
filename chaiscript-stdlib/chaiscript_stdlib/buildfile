@@ -23,5 +23,5 @@ import chaiscript = libchaiscript%lib{chaiscript}
   # up to the install configuration and clearly communicate,
   # that it should be set to one specific location.
   #
-  install = lib/chaiscript/
+  # install = lib/chaiscript/
 }

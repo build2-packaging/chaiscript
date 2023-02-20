@@ -17,3 +17,4 @@ if ($config.chaiscript.use_readline)
 #   text ChaiScript use of readline library for interpreter is disabled.
 
 exe{chai}: {hxx cxx}{**} $libs
+

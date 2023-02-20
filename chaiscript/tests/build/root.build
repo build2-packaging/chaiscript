@@ -1,0 +1,15 @@
+# The C++ module is used to be able to use the 'libs' target
+# and dynamically load ChaiScript modules for testing.
+#
+cxx.std = latest
+using cxx
+
+# ChaiScript File Type and Extension
+#
+define chai: file
+chai{*}: extension = chai
+
+# ChaiScript Inclusion File Type and Extension
+#
+define inc: file
+inc{*}: extension = inc

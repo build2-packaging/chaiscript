@@ -4,6 +4,11 @@
 doc{UPSTREAM.README.md}@./: install = doc/README.md
 doc{README.md}@./: install = doc/PACKAGE.README.md
 
-# ChaiScript Standard Library Module and ChaiScript Interpreter
+# Build the executable and modules.
+# The order seems to be important here.
 #
-./: static_libs/ chai/
+./: static_libs/ chai/ modules/ tests/
+
+# Tests will not be installed.
+#
+tests/: install = false

@@ -28,8 +28,7 @@ test.target = $cxx.target
 # config [bool] config.chaiscript.build_modules ?= true
 # config [bool] config.chaiscript.use_std_make_shared ?= false
 
-config [bool] config.chaiscript.use_readline ?= \
-  ($cxx.target.class == 'linux')
+config [bool] config.chaiscript.use_readline ?= false
 
 # switch ($cxx.target.class)
 # {

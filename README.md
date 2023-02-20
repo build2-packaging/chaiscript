@@ -55,11 +55,19 @@ Using the `chai` interpreter for ChaiScript scripts, as a REPL, or as build-time
 
 ## Configuration
 
+### Installation of the Standard Library Module
+To be able to automatically find the standard library, its installation directory should also follow the patterns given by the implementation of ChaiScript itself where it seems to be basically hardcoded.
+To not run into problems with the `pkg-config` files and other methods to reimport the `chaiscript_stdlib` module, we leave this part up to configuration.
+The following option is the recommended way of configuring the install command inside the `config.build` file that lies in the `build` directory of your project's configuration.
+
+    config.install.lib = exec_root/lib/chaiscript/
+
+
 ## Issues
-- The installation of `chaiscript_stdlib` is basically hardcoded. Look into `libchaiscript/chaiscript_stdlib/buildfile` for some notes what could be changed.
+- The installation path of `chaiscript_stdlib` is basically hardcoded. Look into `libchaiscript/chaiscript_stdlib/buildfile` for some notes what could be changed.
 - This package does not build or execute the `fuzzer` test.
 - This package does not build or execute the performance tests because `valgrind` would be needed.
-- Some tests are not compilable or runnable (build2 error reading multiline strings).
+- Not all unit tests based on ChaiScript scripts are sucessfull when using Clang with `libc++`. This seems to be an implementation issue of the ChaiScript library itself.
 - Not all tests have been wrapped.
 - To fix the strange inclusion scheme of the statically generated libraries `parser` and `stdlib`, their content actually needed to be copied and adjusted.
 - Currently, multithreading is not handled correctly.

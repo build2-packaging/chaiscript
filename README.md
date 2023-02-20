@@ -37,6 +37,7 @@ Add the respective dependencies in your project's `manifest` file to make those 
 
     depends: libchaiscript ^ 6.1.0
     depends: chaiscript ^ 6.1.0
+    depends: chaiscript-stdlib ^ 6.1.0
 
 The header-only C++ library to use ChaiScript as an embedded language can be imported by the following declaration in the `buildfile`.
 
@@ -45,8 +46,9 @@ The header-only C++ library to use ChaiScript as an embedded language can be imp
 To import the dynamically loadable module which provides the standard library for a ChaiScript instance, do the following.
 For dynamic loading, you do not need to link against it but should instead provide its directory as module path to the application that is using ChaiScript.
 
-    import chaiscript_stdlib += libchaiscript%lib{chaiscript_stdlib}
-    chaiscript_stdlib_path = $directory($chaiscript_stdlib)
+    import! [metadata, rule_hint=cxx.link] \
+        stdlib_module = chaiscript-stdlib%libs{chaiscript_stdlib}
+    stdlib_path = $($stdlib_module: chaiscript_stdlib.dir)
 
 Using the `chai` interpreter for ChaiScript scripts, as a REPL, or as build-time dependency with immediate and standard importation is supported.
 

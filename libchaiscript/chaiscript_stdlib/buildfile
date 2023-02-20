@@ -1,4 +1,4 @@
-import chaiscript = libchaiscript%lib{chaiscript}
+import chaiscript = lib{chaiscript}
 
 # Build the shared library that will be used as
 # the ChaiScript standard library module

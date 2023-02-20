@@ -8,8 +8,8 @@
 # To allow for the full range of compiler configurations,
 # we will still use the latest available standard.
 #
-cxx.std = c++17
-# cxx.std = latest
+# cxx.std = c++17
+cxx.std = latest
 
 using cxx
 

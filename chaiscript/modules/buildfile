@@ -4,11 +4,11 @@ import chaiscript = libchaiscript%lib{chaiscript}
 # We also make sure to put modules in the same folder.
 # These are only local modules and shall not be installed.
 #
-libs{stl_extra}: cxx{stl_extra} $chaiscript
+./: libs{stl_extra}: cxx{stl_extra} $chaiscript
 {
   install = false
 }
-libs{test_module}: cxx{test_module} $chaiscript
+./: libs{test_module}: cxx{test_module} $chaiscript
 {
   install = false
 }

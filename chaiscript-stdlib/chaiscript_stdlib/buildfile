@@ -24,4 +24,8 @@ import chaiscript = libchaiscript%lib{chaiscript}
   # that it should be set to one specific location.
   #
   # install = lib/chaiscript/
+  export.metadata = 1 chaiscript_stdlib
+  chaiscript_stdlib.dir = [dir_path] $out_base/
+  chaiscript_stdlib.dir.for_install = \
+    ($install.root != [null] ? $install.resolve([dir_path] lib/) : )
 }

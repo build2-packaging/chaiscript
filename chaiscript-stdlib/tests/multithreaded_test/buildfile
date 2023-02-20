@@ -1,6 +1,11 @@
 import chaiscript = libchaiscript%lib{chaiscript}
-import chaiscript_stdlib = chaiscript-stdlib%libs{chaiscript_stdlib}
-module_path = $directory($chaiscript_stdlib)
+# import chaiscript_stdlib = chaiscript-stdlib%libs{chaiscript_stdlib}
+# module_path = $directory($chaiscript_stdlib)
+
+import! [metadata, rule_hint=cxx.link] stdlib = \
+  chaiscript-stdlib%libs{chaiscript_stdlib}
+
+module_path = $($stdlib: chaiscript_stdlib.dir)
 use_path = $src_base
 
 ./: exe{multithreaded_test}: {hxx cxx}{**} $chaiscript testscript

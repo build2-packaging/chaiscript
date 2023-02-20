@@ -62,16 +62,31 @@ The following option is the recommended way of configuring the install command i
 
     config.install.lib = exec_root/lib/chaiscript/
 
+### Multithread Support
+Multithread support is unconditionally enabled by default and may be turned off.
+
+    config [bool] config.libchaiscript.multithread_support_enabled ?= true
+
+### Dynamic Module Loading
+The support to dynamically load ChaiScript modules is unconditionally enabled by default and may be turned off.
+
+    config [bool] config.libchaiscript.dynload_enabled ?= true
+
+### Use of GNU readline
+For now, the use of the GNU `readline` library for the ChaiScript interpreter `chai` is unconditionally disabled by default.
+This is mainly the case to remove system dependencies for CI.
+If `readline` is available on the system, we recommend to enable it.
+
+    config [bool] config.chaiscript.use_readline ?= false
+
 
 ## Issues
-- The installation path of `chaiscript_stdlib` is basically hardcoded. Look into `libchaiscript/chaiscript_stdlib/buildfile` for some notes what could be changed.
+<!-- - The installation path of `chaiscript_stdlib` is basically hardcoded. Look into `libchaiscript/chaiscript_stdlib/buildfile` for some notes what could be changed. -->
+- In nearly all configurations, a lot of warnings are emitted when building libraries or tests. We should not disable them to be aware of potential problems, though.
 - This package does not build or execute the `fuzzer` test.
 - This package does not build or execute the performance tests because `valgrind` would be needed.
 - Not all unit tests based on ChaiScript scripts are sucessfull when using Clang with `libc++`. This seems to be an implementation issue of the ChaiScript library itself.
-- Not all tests have been wrapped.
 - To fix the strange inclusion scheme of the statically generated libraries `parser` and `stdlib`, their content actually needed to be copied and adjusted.
-- Currently, multithreading is not handled correctly.
-- The build2 testscript dependencies are fully provided, which results in an error when only running `b test`.
 - If there would ever be a new version, check against new script files for testing and adjust all the symbolic links.
 
 ## Contributing

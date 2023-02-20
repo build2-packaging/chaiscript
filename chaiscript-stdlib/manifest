@@ -1,5 +1,5 @@
 : 1
-name: chaiscript
+name: chaiscript-stdlib
 version: 6.1.0
 project: chaiscript
 summary: ChaiScript is a header-only C++ embedded scripting language loosely based on ECMA script. It is designed for ease of use and tight integration with C++.
@@ -20,3 +20,5 @@ depends: * build2 >= 0.15.0
 depends: * bpkg >= 0.15.0
 
 depends: libchaiscript == $
+
+requires: c++17

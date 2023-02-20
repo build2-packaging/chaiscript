@@ -1,0 +1,7 @@
+project = chaiscript-stdlib
+
+using version
+using config
+using test
+using install
+using dist

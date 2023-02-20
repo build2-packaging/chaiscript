@@ -1,0 +1,95 @@
+# Uncomment to suppress warnings coming from external libraries.
+#
+#cxx.internal.scope = current
+
+# ChaiScript does not officially support C++20 and higher.
+# Using the latest C++ standard may result in warnings and errors.
+# On the other hand, compilers may not fully provide C++17 support.
+# To allow for the full range of compiler configurations,
+# we will still use the latest available standard.
+#
+cxx.std = c++17
+# cxx.std = latest
+
+using cxx
+
+hxx{*}: extension = hpp
+ixx{*}: extension = ipp
+txx{*}: extension = tpp
+cxx{*}: extension = cpp
+
+# ChaiScript is configurable from the outside by macros.
+# Hence, we assume headers to be not importable.
+#
+hxx{*}: cxx.importable = false
+
+# The test target for cross-testing (running tests under Wine, etc).
+#
+test.target = $cxx.target
+
+# Configuration
+#
+# config [bool] config.libchaiscript.multithread_support_enabled ?= true
+# config [bool] config.libchaiscript.dynload_enabled ?= true
+# config [bool] config.libchaiscript.use_std_make_shared ?= false
+
+# default.poptions = # Empty
+# default.coptions = # Empty
+# default.loptions = # Empty
+# default.libs = # Empty
+
+# default.export.poptions = # Empty
+# default.export.coptions = # Empty
+# default.export.loptions = # Empty
+# default.export.libs = # Empty
+
+# # In C++20, using 'std::pod' is deprecated.
+# #
+# cxx.coptions += -Wno-deprecated
+
+# # Reduce noise from Clang.
+# #
+# if ($cxx.id == 'clang')
+#   cxx.coptions += -Wno-defaulted-function-deleted
+
+# # Multithread Support
+# #
+# if ($config.libchaiscript.multithread_support_enabled)
+# {
+#   # text ChaiScript multithread support is enabled.
+#   if ($cxx.target.system != 'win32-msvc')
+#     default.export.libs += -pthread
+# }
+# else
+# {
+#   # text ChaiScript multithread support is disabled.
+#   default.export.poptions += -DCHAISCRIPT_NO_THREADS
+# }
+
+# # Dynamic Module Loading Support
+# #
+# if ($config.libchaiscript.dynload_enabled)
+# {
+#   # text ChaiScript dynamic module loading is enabled.
+#   if ($cxx.target.class != 'windows')
+#     default.export.libs += -ldl
+# }
+# else
+# {
+#   # text ChaiScript dynamic module loading is disabled.
+#   default.export.poptions += -DCHAISCRIPT_NO_DYNLOAD
+# }
+
+# # ChaiScript or STL Smart Pointers
+# #
+# if ($config.libchaiscript.use_std_make_shared)
+#   default.export.poptions += -DCHAISCRIPT_USE_STD_MAKE_SHARED
+
+# # All the executables and libraries in this package
+# # need to be compiled with the same options.
+# # Therefore we provide a global setting of compile options.
+# #
+# cxx.poptions += $default.poptions $default.export.poptions
+# cxx.coptions += $default.coptions $default.export.coptions
+# cxx.loptions += $default.loptions $default.export.loptions
+# cxx.libs += $default.libs $default.export.libs

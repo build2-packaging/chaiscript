@@ -15,7 +15,5 @@ doc{README.md}@./: install = doc/PACKAGE.README.md
 }
 hxx{*}: install.subdirs = true
 
-# Explicitly handle all other targets.
-#
-./: chaiscript_stdlib/ tests/
+./: tests/
 tests/: install = false

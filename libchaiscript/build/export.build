@@ -1,13 +1,6 @@
 $out_root/
 {
   include ./
-  include chaiscript_stdlib/
 }
 
-switch ($name($import.target))
-{
-  case 'chaiscript'
-    export $out_root/$import.target
-  case 'chaiscript_stdlib'
-    export $out_root/chaiscript_stdlib/$import.target
-}
+export $out_root/$import.target

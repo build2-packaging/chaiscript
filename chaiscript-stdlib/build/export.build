@@ -1,0 +1,6 @@
+$out_root/
+{
+  include chaiscript_stdlib/
+}
+
+export $out_root/chaiscript_stdlib/$import.target

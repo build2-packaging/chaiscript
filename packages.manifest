@@ -5,4 +5,6 @@ location: libchaiscript-samples/
 :
 location: libchaiscript-tests/
 :
+location: chaiscript-stdlib/
+:
 location: chaiscript/

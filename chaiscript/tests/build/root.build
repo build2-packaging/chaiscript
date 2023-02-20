@@ -1,8 +1,25 @@
-# The C++ module is used to be able to use the 'libs' target
-# and dynamically load ChaiScript modules for testing.
+# Uncomment to suppress warnings coming from external libraries.
 #
-cxx.std = latest
+#cxx.internal.scope = current
+
+# cxx.std = latest
+cxx.std = c++17
+
 using cxx
+
+hxx{*}: extension = hpp
+ixx{*}: extension = ipp
+txx{*}: extension = tpp
+cxx{*}: extension = cpp
+
+# ChaiScript is configurable from the outside by macros.
+# Hence, we assume headers to be not importable.
+#
+hxx{*}: cxx.importable = false
+
+# The test target for cross-testing (running tests under Wine, etc).
+#
+test.target = $cxx.target
 
 # ChaiScript File Type and Extension
 #

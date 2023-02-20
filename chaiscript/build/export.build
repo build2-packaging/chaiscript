@@ -1,12 +1,6 @@
 $out_root/
 {
   include chai/
-  include modules/
 }
 
-if ($import.target == libs{stl_extra})
-  export $out_root/modules/libs{stl_extra}
-elif ($import.target == libs{test_module})
-  export $out_root/modules/libs{test_module}
-elif ($import.target == exe{chai})
-  export $out_root/chai/exe{chai}
+export $out_root/chai/exe{chai}

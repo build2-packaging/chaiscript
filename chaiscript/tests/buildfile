@@ -1,13 +1,16 @@
-# The executable and modules are imported on purpose
-# to get the correct output directories for their targets.
-# Using ad hoc importation would only give us the source path.
+# Building a module for dynamic loading requires a shared library.
+# We also make sure to put modules in the same folder.
+# These are only private modules and shall not be installed.
+#
+import lib = libchaiscript%lib{chaiscript}
+./: libs{stl_extra}: cxx{stl_extra} $lib
+./: libs{test_module}: cxx{test_module} $lib
+modules = libs{stl_extra} libs{test_module}
+module_path = $out_base
+
+# The ChaiScript interpreter will run the test scripts.
 #
 import chaiscript = chaiscript%exe{chai}
-#
-modules = # Empty
-import modules += chaiscript%libs{stl_extra}
-import modules += chaiscript%libs{test_module}
-module_path = $directory($modules[0])
 
 # All test and inclusion scripts reside in the 'scripts' directory.
 # There is also the inclusion script for the unit testing library.
@@ -17,7 +20,8 @@ module_path = $directory($modules[0])
 use_path = $src_base/scripts
 unit_test_lib = scripts/inc{unit_test}
 
-
+# Make to also depend on all inclusion files for the 'dist' command.
+#
 ./: scripts/inc{*}
 
 # Probably '3.x' scripts are for backwards compatibility tests.

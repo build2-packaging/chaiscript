@@ -2,11 +2,13 @@ import chaiscript_stdlib = libchaiscript%libs{chaiscript_stdlib}
 module_path = $directory($chaiscript_stdlib)
 use_path = $src_base
 
-exe{multithreaded_test}: {hxx cxx}{**} $chaiscript testscript
+./: exe{multithreaded_test}: {hxx cxx}{**} $chaiscript testscript
+
+./: inc{multithreaded_work}
 
 # To run the test, the standard library module is required
 # but not allowed to be linked already.
 # So, it is only a prerequisite for the testscript.
 #
-testscript@./: $chaiscript_stdlib inc{multithreaded_work}
+testscript@./: $chaiscript_stdlib
 

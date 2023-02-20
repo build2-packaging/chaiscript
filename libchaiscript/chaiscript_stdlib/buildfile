@@ -4,7 +4,11 @@ import chaiscript = lib{chaiscript}
 # the ChaiScript standard library module
 # that can be dynamically loaded at runtime.
 #
-libs{chaiscript_stdlib}: cxx{**} $chaiscript
+# It needs to be explicitly specified as target of the directory.
+# Otherwise, it is not a default export target
+# in the currently provided export inclusion in 'export.build'.
+#
+./: libs{chaiscript_stdlib}: cxx{**} $chaiscript
 {
   # Then naming scheme is important, as it is more or less
   # hardcoded in 'chaiscript/language/chaiscript_engine.hpp'

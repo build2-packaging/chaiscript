@@ -22,28 +22,44 @@
 </p>
 
 ## Usage
-The dependency to the package `chaiscript` in your `manifest` file should look like the following.
+The [original ChaiScript repository](https://github.com/ChaiScript/ChaiScript) has been split into multiple build2 packages to allow for the greater flexibility.
+Mainly `libchaiscript` is used to get access to the header-only library and the ChaiScript standard library module that can be loaded at runtime.
+The package `chaiscript` makes ChaiScript's own interpreter `chai` available to be used.
+
+Make sure to add the stable `cppget.org` repositories to your project's `repositories.manifest` to be able to fetch the packages.
+
+    :
+    role: prerequisite
+    location: https://pkg.cppget.org/1/stable
+    # trust: ...
+
+Add the respective dependencies in your project's `manifest` file to make those packages available for import.
 
     depends: libchaiscript ^ 6.1.0
     depends: chaiscript ^ 6.1.0
 
-It provides several targets for importation.
 The header-only C++ library to use ChaiScript as an embedded language can be imported by the following declaration in the `buildfile`.
 
     import chaiscript = libchaiscript%lib{chaiscript}
 
 To import the dynamically loadable module which provides the standard library for a ChaiScript instance, do the following.
+For dynamic loading, you do not need to link against it but should instead provide its directory as module path to the application that is using ChaiScript.
 
     import chaiscript_stdlib += libchaiscript%lib{chaiscript_stdlib}
+    chaiscript_stdlib_path = $directory($chaiscript_stdlib)
 
-Also, using the `chai` interpreter for ChaiScript as build-time dependency with immediate importation is supported.
+Using the `chai` interpreter for ChaiScript scripts, as a REPL, or as build-time dependency with immediate and standard importation is supported.
 
+    import chai = chaiscript%exe{chai}
     import! [metadata] chai = chaiscript%exe{chai}
 
 ## Configuration
 
 ## Issues
-- Some tests are not compilable or runnable (catch2 compile error, build2 error reading multiline strings).
+- The installation of `chaiscript_stdlib` is basically hardcoded. Look into `libchaiscript/chaiscript_stdlib/buildfile` for some notes what could be changed.
+- This package does not build or execute the `fuzzer` test.
+- This package does not build or execute the performance tests because `valgrind` would be needed.
+- Some tests are not compilable or runnable (build2 error reading multiline strings).
 - Not all tests have been wrapped.
 - To fix the strange inclusion scheme of the statically generated libraries `parser` and `stdlib`, their content actually needed to be copied and adjusted.
 - Currently, multithreading is not handled correctly.

@@ -1,6 +1,7 @@
 $out_root/
 {
-  include ./
+  include chai/
+  include modules/
 }
 
 if ($import.target == libs{stl_extra})

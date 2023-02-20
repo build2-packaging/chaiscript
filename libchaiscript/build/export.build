@@ -1,6 +1,7 @@
 $out_root/
 {
   include ./
+  include chaiscript_stdlib/
 }
 
 switch ($name($import.target))

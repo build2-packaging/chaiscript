@@ -26,7 +26,7 @@ import libs = libchaiscript%lib{chaiscript}
 
 # In C++20, using 'std::pod' is deprecated.
 #
-# cxx.coptions += -Wno-deprecated
+cxx.coptions += -Wno-deprecated
 
 # Reduce noise from Clang.
 #

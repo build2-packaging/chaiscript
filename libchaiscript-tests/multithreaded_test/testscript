@@ -1,1 +1,4 @@
-env CHAI_USE_PATH="$src_root/scripts/" CHAI_MODULE_PATH="$chai_module_path/" -- $* >-
+env \
+  CHAI_USE_PATH="$use_path/" \
+  CHAI_MODULE_PATH="$module_path/" \
+    -- $* >-

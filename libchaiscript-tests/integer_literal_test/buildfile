@@ -1,4 +1,4 @@
 include ../static_libs/
-exe{integer_literal_test}: {hxx cxx}{**} testscript \
+exe{integer_literal_test}: {hxx cxx}{**} \
   ../static_libs/libue{parser} \
   ../static_libs/libue{stdlib}

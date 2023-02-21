@@ -2,8 +2,8 @@
 #
 #cxx.internal.scope = current
 
-cxx.std = latest
-# cxx.std = c++17
+# cxx.std = latest
+cxx.std = c++17
 
 using cxx
 
@@ -37,7 +37,7 @@ inc{*}: extension = inc
 
 # In C++20, using 'std::pod' is deprecated.
 #
-cxx.coptions += -Wno-deprecated
+# cxx.coptions += -Wno-deprecated
 
 # Reduce noise from Clang.
 #

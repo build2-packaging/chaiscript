@@ -1,1 +1,1 @@
-exe{example}: {hxx cxx}{**} $libs testscript
+exe{example}: {hxx cxx}{**} $libs

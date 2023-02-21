@@ -94,6 +94,7 @@ If `readline` is available on the system, we recommend to enable it.
 - ChaiScript is not made for C++20 and higher language standards. As the library is header-only, we do not restrict the language standard of the library package `libchaiscript` but instead keep it to be `cxx.std = latest`. This may result in compilation errors in a project that uses ChaiScript, such as it has been with its own samples and tests. In those, we are forcing the C++17 standard to get rid of most of these errors.
 - In nearly all configurations, a lot of warnings are emitted when building libraries or tests. We should not disable them to be aware of potential problems, though.
 - Some CI configurations exhibit the `inconsistent C++ compiler behavior` error. As other configurations quite fine with this package, this might be the result from compiler bugs when preprocessing raw string literals.
+- Using Clang on Windows with MSVC, the object copy count test given in the `compiled_tests.cpp` file fails due to the wrong number of destructor and move calls. This is most likely an implementation issue of ChaiScript.
 - This package does not build or execute the `fuzzer` test.
 - This package does not build or execute the performance tests because `valgrind` would be needed.
 - Not all unit tests based on ChaiScript scripts are sucessfull when using Clang with `libc++`. This seems to be an implementation issue of the ChaiScript library itself.

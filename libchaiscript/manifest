@@ -23,3 +23,6 @@ depends: * build2 >= 0.15.0
 depends: * bpkg >= 0.15.0
 
 requires: c++17
+
+builds: all
+builds: -( +windows &gcc -optimized ) ; Unoptimized compilation with MinGW on Windows takes an eternity to finish.

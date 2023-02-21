@@ -25,6 +25,8 @@
 The [original ChaiScript repository](https://github.com/ChaiScript/ChaiScript) has been split into multiple build2 packages to allow for the greater flexibility.
 Mainly `libchaiscript` is used to get access to the header-only library and the ChaiScript standard library module that can be loaded at runtime.
 The package `chaiscript` makes ChaiScript's own interpreter `chai` available to be used.
+`chaiscript-stdlib` exports the compiled and dynamically loadable standard library module for the basic ChaiScript engine.
+Typically, you will not need to use it.
 
 Make sure to add the stable `cppget.org` repositories to your project's `repositories.manifest` to be able to fetch the packages.
 
@@ -34,26 +36,31 @@ Make sure to add the stable `cppget.org` repositories to your project's `reposit
     # trust: ...
 
 Add the respective dependencies in your project's `manifest` file to make those packages available for import.
+Hereby, all packages should use the same version constraint.
 
     depends: libchaiscript ^ 6.1.0
-    depends: chaiscript ^ 6.1.0
-    depends: chaiscript-stdlib ^ 6.1.0
+    # or
+    depends: { libchaiscript chaiscript chaiscript-stdlib } ^ 6.1.0
 
 The header-only C++ library to use ChaiScript as an embedded language can be imported by the following declaration in the `buildfile`.
 
     import chaiscript = libchaiscript%lib{chaiscript}
 
-To import the dynamically loadable module which provides the standard library for a ChaiScript instance, do the following.
-For dynamic loading, you do not need to link against it but should instead provide its directory as module path to the application that is using ChaiScript.
+Using the `chai` interpreter for ChaiScript scripts, as a REPL, or as build-time dependency with immediate and standard importation is supported.
+Because it is not able to change the code of `chai`, there is no way for now to provide any metadata in the executable.
+
+    import chai = chaiscript%exe{chai}
+    # or
+    import! chai = chaiscript%exe{chai}
+
+To import the dynamically loadable module which provides the standard library for a ChaiScript instance, we need to rely on metadata.
+A dynamic module should not be linked to your executable but instead loaded at runtime.
+Hence, to use it properly for running ChaiScript scripts for tests or other things, you would need the module as a prerequisite but only use its directory as input.
+This can be accomplished by immediate importation with metadata support.
 
     import! [metadata, rule_hint=cxx.link] \
         stdlib_module = chaiscript-stdlib%libs{chaiscript_stdlib}
-    stdlib_path = $($stdlib_module: chaiscript_stdlib.dir)
-
-Using the `chai` interpreter for ChaiScript scripts, as a REPL, or as build-time dependency with immediate and standard importation is supported.
-
-    import chai = chaiscript%exe{chai}
-    import! [metadata] chai = chaiscript%exe{chai}
+    stdlib_dir = $($stdlib_module: chaiscript_stdlib.dir)
 
 ## Configuration
 
@@ -84,6 +91,7 @@ If `readline` is available on the system, we recommend to enable it.
 
 ## Issues
 <!-- - The installation path of `chaiscript_stdlib` is basically hardcoded. Look into `libchaiscript/chaiscript_stdlib/buildfile` for some notes what could be changed. -->
+- ChaiScript is not made for C++20 and higher language standards. As the library is header-only, we do not restrict the language standard of the library package `libchaiscript` but instead keep it to be `cxx.std = latest`. This may result in compilation errors in a project that uses ChaiScript, such as it has been with its own samples and tests. In those, we are forcing the C++17 standard to get rid of most of these errors.
 - In nearly all configurations, a lot of warnings are emitted when building libraries or tests. We should not disable them to be aware of potential problems, though.
 - This package does not build or execute the `fuzzer` test.
 - This package does not build or execute the performance tests because `valgrind` would be needed.

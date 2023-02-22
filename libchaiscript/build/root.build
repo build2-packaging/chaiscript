@@ -45,12 +45,12 @@ default.export.libs = # Empty
 
 # In C++20, using 'std::pod' is deprecated.
 #
-cxx.coptions += -Wno-deprecated
+# cxx.coptions += -Wno-deprecated
 
 # Reduce noise from Clang.
 #
-if ($cxx.id == 'clang')
-  cxx.coptions += -Wno-defaulted-function-deleted
+# if ($cxx.id == 'clang')
+#   cxx.coptions += -Wno-defaulted-function-deleted
 
 # Multithread Support
 #

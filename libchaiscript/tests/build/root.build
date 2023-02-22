@@ -3,7 +3,7 @@
 #cxx.internal.scope = current
 
 # cxx.std = latest
-cxx.std = c++17
+cxx.std = 17
 
 using cxx
 

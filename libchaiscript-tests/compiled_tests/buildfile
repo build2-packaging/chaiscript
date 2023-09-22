@@ -11,4 +11,5 @@ import catch2 = catch2%lib{catch2}
 include ../static_libs/
 exe{compiled_tests}: {hxx cxx}{**} $catch2 \
   ../static_libs/libue{parser} \
-  ../static_libs/libue{stdlib}
+  ../static_libs/libue{stdlib} \
+  testscript

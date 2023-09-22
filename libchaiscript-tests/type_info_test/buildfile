@@ -8,4 +8,4 @@
 #
 import catch2 = catch2%lib{catch2}
 
-exe{type_info_test}: {hxx cxx}{**} $chaiscript $catch2
+exe{type_info_test}: {hxx cxx}{**} $chaiscript $catch2 testscript

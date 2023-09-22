@@ -6,11 +6,36 @@
 # ChaiScript Header-Only Library
 #
 lib{chaiscript}: chaiscript/hxx{**}
-{
-  cxx.export.poptions += $default.export.poptions "-I$src_root"
-  cxx.export.coptions += $default.export.coptions
-  cxx.export.loptions += $default.export.loptions
-  cxx.export.libs += $default.export.libs
-}
 
+# Build and Export Options
+#
+lib{chaiscript}: cxx.export.poptions = "-I$src_root"
+#
+# Multithread Support
+#
+if ($config.libchaiscript.multithread_support_enabled)
+{
+  if ($cxx.target.system != 'win32-msvc')
+    lib{chaiscript}: cxx.export.libs = -pthread
+}
+else
+  lib{chaiscript}: cxx.export.poptions += -DCHAISCRIPT_NO_THREADS
+#
+# Dynamic Module Loading Support
+#
+if ($config.libchaiscript.dynload_enabled)
+{
+  if ($cxx.target.class != 'windows')
+    default.export.libs += -ldl
+}
+else
+  lib{chaiscript}: cxx.export.poptions += -DCHAISCRIPT_NO_DYNLOAD
+#
+# ChaiScript or STL Smart Pointers
+#
+if ($config.libchaiscript.use_std_make_shared)
+  lib{chaiscript}: cxx.export.poptions += -DCHAISCRIPT_USE_STD_MAKE_SHARED
+
+# Installation
+#
 hxx{*}: install.subdirs = true

@@ -1,9 +1,2 @@
-# Documentation, License, and Package Manifest
-#
-./: manifest legal{LICENSE} doc{*.md}
-doc{UPSTREAM.README.md}@./: install = doc/README.md
-doc{README.md}@./: install = doc/PACKAGE.README.md
-
-./: {*/ -build/}
-
+./: {*/ -build/} manifest legal{LICENSE} doc{*.md}
 tests/: install = false

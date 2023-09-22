@@ -1,19 +1,16 @@
-# Documentation, License, and Package Manifest
+# Default Targets and Package Files
 #
-./: manifest legal{LICENSE} doc{*.md}
-doc{UPSTREAM.README.md}@./: install = doc/README.md
-doc{README.md}@./: install = doc/PACKAGE.README.md
+./: lib{chaiscript} manifest legal{LICENSE} doc{*.md}
+./: tests/: install = false
 
 # ChaiScript Header-Only Library
 #
-./: lib{chaiscript}: chaiscript/hxx{**}
+lib{chaiscript}: chaiscript/hxx{**}
 {
   cxx.export.poptions += $default.export.poptions "-I$src_root"
   cxx.export.coptions += $default.export.coptions
   cxx.export.loptions += $default.export.loptions
   cxx.export.libs += $default.export.libs
 }
-hxx{*}: install.subdirs = true
 
-./: tests/
-tests/: install = false
+hxx{*}: install.subdirs = true

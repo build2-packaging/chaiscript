@@ -1,8 +1,10 @@
 : 1
 name: chaiscript-stdlib
 version: 6.1.0
+type: lib
+language: c++
 project: chaiscript
-summary: ChaiScript is a header-only C++ embedded scripting language loosely based on ECMA script. It is designed for ease of use and tight integration with C++.
+summary: Dynamically Loadable Standard Library for ChaiScript Interpreter 'chaiscript'
 license: BSD-3-Clause
 
 description-file: README.md
@@ -12,12 +14,12 @@ url: https://chaiscript.com/index.html
 src-url: https://github.com/ChaiScript/ChaiScript
 doc-url: https://chaiscript.com/docs.html
 
+package-description-file: PACKAGE-README.md
 package-url: https://github.com/build2-packaging/chaiscript/
-package-email: lyrahgames@mailbox.org
-build-warning-email: lyrahgames@mailbox.org
+package-email: packaging@build2.org
 
-depends: * build2 >= 0.15.0
-depends: * bpkg >= 0.15.0
+depends: * build2 >= 0.16.0
+depends: * bpkg >= 0.16.0
 
 depends: libchaiscript == $
 

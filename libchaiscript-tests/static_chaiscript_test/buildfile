@@ -4,3 +4,6 @@ exe{static_chaiscript_test}: {hxx cxx}{**} $chaiscript
 # This is on purpose and we do not want to print this message.
 #
 cxx.poptions += -DCHAISCRIPT_NO_THREADS_WARNING
+
+if ($cxx.id == 'msvc')
+  cxx.coptions += /bigobj

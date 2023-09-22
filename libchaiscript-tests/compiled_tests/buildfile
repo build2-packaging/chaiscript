@@ -13,3 +13,6 @@ exe{compiled_tests}: {hxx cxx}{**} $catch2 \
   ../static_libs/libue{parser} \
   ../static_libs/libue{stdlib} \
   testscript
+
+if ($cxx.id == 'msvc')
+  cxx.coptions += /bigobj

@@ -1,1 +1,4 @@
 exe{multifile_test}: {hxx cxx}{**} $chaiscript
+
+if ($cxx.id == 'msvc')
+  cxx.coptions += /bigobj

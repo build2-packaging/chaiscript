@@ -1,25 +1,11 @@
-<h1 align="center">
-    build2 Package for ChaiScript
-</h1>
+# build2 Packages for ChaiScript Library and Interpreter
 
-<p align="center">
-    <a href="https://chaiscript.com/index.html">ChaiScript</a> is a header-only C++ embedded scripting language loosely based on ECMA script. It is designed for ease of use and tight integration with C++.
-</p>
+[ChaiScript](https://chaiscript.com/index.html) is a header-only C++ embedded scripting language loosely based on ECMA script. It is designed for ease of use and tight integration with C++.
 
-<p align="center">
-    <a href="https://chaiscript.com/index.html">
-        <img src="https://img.shields.io/website/https/chaiscript.com/index.html.svg?down_message=offline&label=Official&style=for-the-badge&up_color=blue&up_message=online">
-    </a>
-    <a href="https://github.com/build2-packaging/chaiscript">
-        <img src="https://img.shields.io/website/https/github.com/build2-packaging/chaiscript.svg?down_message=offline&label=build2&style=for-the-badge&up_color=blue&up_message=online">
-    </a>
-    <a href="https://cppget.org/chaiscript">
-        <img src="https://img.shields.io/website/https/cppget.org/chaiscript.svg?down_message=offline&label=cppget.org&style=for-the-badge&up_color=blue&up_message=online">
-    </a>
-    <a href="https://queue.cppget.org/chaiscript">
-        <img src="https://img.shields.io/website/https/queue.cppget.org/chaiscript.svg?down_message=empty&down_color=blue&label=queue.cppget.org&style=for-the-badge&up_color=orange&up_message=running">
-    </a>
-</p>
+[![Official](https://img.shields.io/website/https/chaiscript.com/index.html.svg?down_message=offline&label=Official&style=for-the-badge&up_color=blue&up_message=online)](https://chaiscript.com/index.html)
+[![build2](https://img.shields.io/website/https/github.com/build2-packaging/chaiscript.svg?down_message=offline&label=build2&style=for-the-badge&up_color=blue&up_message=online)](https://github.com/build2-packaging/chaiscript)
+[![cppget.org](https://img.shields.io/website/https/cppget.org/chaiscript.svg?down_message=offline&label=cppget.org&style=for-the-badge&up_color=blue&up_message=online)](https://cppget.org/chaiscript)
+[![queue.cppget.org](https://img.shields.io/website/https/queue.cppget.org/chaiscript.svg?down_message=empty&down_color=blue&label=queue.cppget.org&style=for-the-badge&up_color=orange&up_message=running)](https://queue.cppget.org/chaiscript)
 
 ## Usage
 The [original ChaiScript repository](https://github.com/ChaiScript/ChaiScript) has been split into multiple build2 packages to allow for the greater flexibility.

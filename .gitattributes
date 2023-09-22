@@ -17,3 +17,7 @@
 # Use `binary` to make sure certain files are never auto-detected as text.
 #
 #*.png binary
+
+# See: https://build2.org/article/symlinks.xhtml#windows
+#
+libchaiscript/chaiscript symlink=dir

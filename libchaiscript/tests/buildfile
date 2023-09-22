@@ -1,2 +1,5 @@
 import chaiscript = libchaiscript%lib{chaiscript}
 exe{tests}: {hxx cxx}{**} $chaiscript testscript
+
+if ($cxx.id == 'msvc')
+  cxx.coptions += /bigobj

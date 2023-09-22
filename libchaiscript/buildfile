@@ -26,7 +26,7 @@ else
 if ($config.libchaiscript.dynload_enabled)
 {
   if ($cxx.target.class != 'windows')
-    default.export.libs += -ldl
+    lib{chaiscript}: cxx.export.libs += -ldl
 }
 else
   lib{chaiscript}: cxx.export.poptions += -DCHAISCRIPT_NO_DYNLOAD
@@ -35,6 +35,16 @@ else
 #
 if ($config.libchaiscript.use_std_make_shared)
   lib{chaiscript}: cxx.export.poptions += -DCHAISCRIPT_USE_STD_MAKE_SHARED
+
+# Library Metadata
+#
+lib{chaiscript}:
+{
+  export.metadata = 1 libchaiscript
+  libchaiscript.multithread_support_enabled = [bool] $config.libchaiscript.multithread_support_enabled
+  libchaiscript.dynload_enabled = [bool] $config.libchaiscript.dynload_enabled
+  libchaiscript.use_std_make_shared = [bool] $config.libchaiscript.use_std_make_shared
+}
 
 # Installation
 #

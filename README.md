@@ -8,27 +8,33 @@
 [![queue.cppget.org](https://img.shields.io/website/https/queue.cppget.org/chaiscript.svg?down_message=empty&down_color=blue&label=queue.cppget.org&style=for-the-badge&up_color=orange&up_message=running)](https://queue.cppget.org/chaiscript)
 
 ## Usage
-The [original ChaiScript repository](https://github.com/ChaiScript/ChaiScript) has been split into multiple build2 packages to allow for the greater flexibility.
-Mainly `libchaiscript` is used to get access to the header-only library and the ChaiScript standard library module that can be loaded at runtime.
+The [original ChaiScript repository](https://github.com/ChaiScript/ChaiScript) has been split into multiple build2 packages to allow for greater flexibility.
+The `libchaiscript` package is used to get access to the ChaiScript header-only library.
 The package `chaiscript` makes ChaiScript's own interpreter `chai` available to be used.
 `chaiscript-stdlib` exports the compiled and dynamically loadable standard library module for the basic ChaiScript engine.
-Typically, you will not need to use it.
+Typically, you will not need to use this one.
 
-Make sure to add the stable `cppget.org` repositories to your project's `repositories.manifest` to be able to fetch the packages.
+Make sure to add the or alpha or stable section of the `cppget.org` repository to your project's `repositories.manifest` to be able to fetch the packages.
 
     :
     role: prerequisite
     location: https://pkg.cppget.org/1/stable
     # trust: ...
 
-Add the respective dependencies in your project's `manifest` file to make those packages available for import.
+If the `cppget.org` repository is not an option then add this Git repository itself instead as a prerequisite.
+
+    :
+    role: prerequisite
+    location: https://github.com/build2-packaging/chaiscript.git
+
+Add the respective dependencies in your project's `manifest` file to make the packages available for import.
 Hereby, all packages should use the same version constraint.
 
     depends: libchaiscript ^ 6.1.0
     # or
     depends: { libchaiscript chaiscript chaiscript-stdlib } ^ 6.1.0
 
-The header-only C++ library to use ChaiScript as an embedded language can be imported by the following declaration in the `buildfile`.
+The header-only C++ library to use ChaiScript as an embedded language can be imported by the following declaration in a `buildfile`.
 
     import chaiscript = libchaiscript%lib{chaiscript}
 
@@ -46,7 +52,7 @@ This can be accomplished by immediate importation with metadata support.
 
     import! [metadata, rule_hint=cxx.link] \
         stdlib_module = chaiscript-stdlib%libs{chaiscript_stdlib}
-    stdlib_dir = $($stdlib_module: chaiscript_stdlib.dir)
+    stdlib_dir = [dir_path] $($stdlib_module: chaiscript_stdlib.dir)
 
 ## Configuration
 
@@ -58,29 +64,32 @@ The following option is the recommended way of configuring the install command i
     config.install.lib = exec_root/lib/chaiscript/
  -->
 ### Multithread Support
-Multithread support is unconditionally enabled by default and may be turned off.
+Multithread support is enabled by default and may be turned off by using the following configuration variable.
+On Unix-based targets, `pthread` will be linked when enabled.
 
     config [bool] config.libchaiscript.multithread_support_enabled ?= true
 
 ### Dynamic Module Loading
-The support to dynamically load ChaiScript modules is unconditionally enabled by default and may be turned off.
+The support to dynamically load ChaiScript modules is enabled by default and may be turned off by using the following configuration variable.
 
     config [bool] config.libchaiscript.dynload_enabled ?= true
 
-### Use of GNU readline
-For now, the use of the GNU `readline` library for the ChaiScript interpreter `chai` is unconditionally disabled by default.
-This is mainly the case to remove system dependencies for CI.
+### Use of GNU `readline`
+For now, the use of the GNU `readline` library for the ChaiScript interpreter `chai` is disabled by default to allow for out-of-the-box CI builds.
+<!-- This is mainly the case to remove system dependencies for CI. -->
 If `readline` is available on the system, we recommend to enable it.
 
     config [bool] config.chaiscript.use_readline ?= false
 
 
-## Issues
+## Issues and Notes
+- Supported Platforms:
+    + Linux: GCC, Clang but not with`libc++`
+    + Windows: MSVC, GCC, and Clang
+    + MacOS: `chaiscript-stdlib` is not supported
 <!-- - The installation path of `chaiscript_stdlib` is basically hardcoded. Look into `libchaiscript/chaiscript_stdlib/buildfile` for some notes what could be changed. -->
-- ChaiScript is not made for C++20 and higher language standards. As the library is header-only, we do not restrict the language standard of the library package `libchaiscript` but instead keep it to be `cxx.std = latest`. This may result in compilation errors in a project that uses ChaiScript, such as it has been with its own samples and tests. In those, we are forcing the C++17 standard to get rid of most of these errors.
-- In nearly all configurations, a lot of warnings are emitted when building libraries or tests. We should not disable them to be aware of potential problems, though.
-- Some CI configurations exhibit the `inconsistent C++ compiler behavior` error. As other configurations quite fine with this package, this might be the result from compiler bugs when preprocessing raw string literals.
-- Using Clang on Windows with MSVC, the object copy count test given in the `compiled_tests.cpp` file fails due to the wrong number of destructor and move calls. This is most likely an implementation issue of ChaiScript.
+- ChaiScript is not made for C++20 and higher language standards. As the library is header-only, we do not restrict the language standard of the library package `libchaiscript` but instead keep it to be `cxx.std = latest`. Especially when using Clang, this may result in compilation errors in a project that uses ChaiScript, such as it has been with its own samples and tests. For now, the workaround is to force the C++17 standard with `cxx.std = 17`. If this is not an option, this package will probably not work with your project.
+- Using Clang on Windows with MSVC, the object copy count test given in the `compiled_tests.cpp` file fails due to the wrong number of destructor and move calls. This is most likely an implementation issue of ChaiScript and, looking into the up-to-date `develop` branch, fixed in the prerelease of version `7.0.0`.
 - This package does not build or execute the `fuzzer` test.
 - This package does not build or execute the performance tests because `valgrind` would be needed.
 - Not all unit tests based on ChaiScript scripts are sucessfull when using Clang with `libc++`. This seems to be an implementation issue of the ChaiScript library itself.

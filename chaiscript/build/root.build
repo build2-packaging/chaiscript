@@ -1,9 +1,8 @@
-# Uncomment to suppress warnings coming from external libraries.
+# Configuration
 #
-#cxx.internal.scope = current
+config [bool] config.chaiscript.use_readline ?= false
 
 cxx.std = latest
-# cxx.std = c++17
 
 using cxx
 
@@ -20,18 +19,3 @@ hxx{*}: cxx.importable = false
 # The test target for cross-testing (running tests under Wine, etc).
 #
 test.target = $cxx.target
-
-# Configuration
-#
-config [bool] config.chaiscript.use_readline ?= false
-
-# In C++20, using 'std::pod' is deprecated.
-#
-cxx.coptions += -Wno-deprecated
-
-# Reduce noise from Clang.
-#
-if ($cxx.id == 'clang')
-  cxx.coptions += -Wno-defaulted-function-deleted
-
-

@@ -22,3 +22,6 @@ depends: * build2 >= 0.16.0
 depends: * bpkg >= 0.16.0
 
 depends: libchaiscript == $
+
+builds: default
+builds: -( +windows &gcc &!optimized ) ; Unoptimized compilation with MinGW on Windows takes an eternity to finish.

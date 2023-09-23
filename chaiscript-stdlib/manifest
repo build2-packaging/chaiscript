@@ -24,3 +24,6 @@ depends: * bpkg >= 0.16.0
 depends: libchaiscript == $
 
 requires: c++17
+
+builds: default
+builds: -( +windows &gcc &!optimized ) ; Unoptimized compilation with MinGW on Windows takes an eternity to finish.

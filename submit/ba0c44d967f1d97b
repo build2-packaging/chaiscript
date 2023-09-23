@@ -1,0 +1,9 @@
+: 1
+name: chaiscript-stdlib
+version: 6.1.0
+type: lib
+language: c++
+project: chaiscript
+summary: Dynamically Loadable Standard Library for ChaiScript Interpreter\
+ 'chaiscript'
+license: BSD-3-Clause

@@ -1,0 +1,9 @@
+: 1
+name: libchaiscript
+version: 6.1.0
+type: lib,binless
+language: c++
+project: chaiscript
+summary: ChaiScript is a header-only C++ embedded scripting language loosely\
+ based on ECMA script.
+license: BSD-3-Clause

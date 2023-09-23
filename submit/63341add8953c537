@@ -1,0 +1,8 @@
+: 1
+name: libchaiscript-tests
+version: 6.1.0
+type: exe
+language: c++
+project: chaiscript
+summary: Tests for 'libchaiscript'
+license: BSD-3-Clause

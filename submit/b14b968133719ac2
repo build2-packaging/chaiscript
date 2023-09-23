@@ -1,0 +1,8 @@
+: 1
+name: libchaiscript-samples
+version: 6.1.0
+type: exe
+language: c++
+project: chaiscript
+summary: Examples for 'libchaiscript'
+license: BSD-3-Clause

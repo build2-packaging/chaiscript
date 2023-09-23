@@ -1,4 +1,4 @@
 env \
   CHAI_USE_PATH="$use_path/" \
   CHAI_MODULE_PATH="$module_path/" \
-    -- $* >-
+    -- $* >- == 0

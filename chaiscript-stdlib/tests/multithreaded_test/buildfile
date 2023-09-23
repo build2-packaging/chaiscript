@@ -1,19 +1,25 @@
-import chaiscript = libchaiscript%lib{chaiscript}
-# import chaiscript_stdlib = chaiscript-stdlib%libs{chaiscript_stdlib}
-# module_path = $directory($chaiscript_stdlib)
+# Default Targets
+#
+./: exe{multithreaded_test} inc{multithreaded_work}
 
+# The main test runner that will dynamically
+# load the standard library module also needs access
+# to the header-only ChaiScript library.
+#
+import chaiscript = libchaiscript%lib{chaiscript}
+exe{multithreaded_test}: {hxx cxx}{**} $chaiscript testscript
+
+# To deduce the directory the standard library module is stored in,
+# an immediate import is used to get access to the library's metadata.
+#
 import! [metadata, rule_hint=cxx.link] stdlib = \
   chaiscript-stdlib%libs{chaiscript_stdlib}
-
-module_path = $($stdlib: chaiscript_stdlib.dir)
-use_path = $src_base
-
-./: exe{multithreaded_test}: {hxx cxx}{**} $chaiscript testscript
-
-./: inc{multithreaded_work}
+#
+module_path = [dir_path] $($stdlib: chaiscript_stdlib.dir)
+use_path = [dir_path] $src_base
 
 # To run the test, the standard library module is required
 # but not allowed to be linked already.
-# So, it is only a prerequisite for the testscript.
+# So, it is only stated as a prerequisite for the testscript.
 #
-testscript@./: $chaiscript_stdlib
+testscript@./: $stdlib

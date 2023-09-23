@@ -1,14 +1,3 @@
-# Uncomment to suppress warnings coming from external libraries.
-#
-#cxx.internal.scope = current
-
-# ChaiScript does not officially support C++20 and higher.
-# Using the latest C++ standard may result in warnings and errors.
-# On the other hand, compilers may not fully provide C++17 support.
-# To allow for the full range of compiler configurations,
-# we will still use the latest available standard.
-#
-# cxx.std = c++17
 cxx.std = latest
 
 using cxx

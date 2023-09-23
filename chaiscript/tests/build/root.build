@@ -1,9 +1,7 @@
-# Uncomment to suppress warnings coming from external libraries.
+# ChaiScript does not officially support C++20 and higher.
+# Test may fail to compile when setting C++ standard to 'latest'.
 #
-#cxx.internal.scope = current
-
-# cxx.std = latest
-cxx.std = c++17
+cxx.std = 17
 
 using cxx
 

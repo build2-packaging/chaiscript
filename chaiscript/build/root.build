@@ -2,7 +2,10 @@
 #
 config [bool] config.chaiscript.use_readline ?= false
 
-cxx.std = latest
+# ChaiScript does not officially support C++20 and higher.
+# Test may fail to compile when setting C++ standard to 'latest'.
+#
+cxx.std = 17
 
 using cxx
 

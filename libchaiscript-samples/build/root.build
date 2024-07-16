@@ -21,3 +21,6 @@ test.target = $cxx.target
 # ChaiScript library will be imported by default.
 #
 import libs = libchaiscript%lib{chaiscript}
+
+if ($cxx.id == 'msvc')
+  cxx.coptions += /bigobj

@@ -11,8 +11,12 @@ import chaiscript = libchaiscript%lib{chaiscript}
 ./: libs{chaiscript_stdlib}: cxx{**} $chaiscript
 {
   # Then naming scheme is important, as it is more or less
-  # hardcoded in 'chaiscript/language/chaiscript_engine.hpp'
+  # hardcoded in:
+  # 'chaiscript/language/chaiscript_engine.hpp' : 304
+  # and
+  # 'chaiscript/chaiscript_defines.hpp' : 77-79
   #
+  # bin.lib.prefix = # No prefix.
   bin.lib.version = "-$version.major.$version.minor.$version.patch"
 
   # To let it be automatically found, its install directory

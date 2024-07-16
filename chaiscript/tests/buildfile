@@ -24,39 +24,28 @@ unit_test_lib = scripts/inc{unit_test}
 #
 ./: scripts/inc{*}
 
-# Probably '3.x' scripts are for backwards compatibility tests.
-# Therefore we loop over all subdirectories and let the scripts run.
+# Loop over all given scripts of the specific directory.
 #
-for d: dir{*}
+for script: scripts/chai{*}
 {
-  # This transformation is needed to remove the directory type.
+  # Provide custom 'test' targets for each script that
+  # runs the ChaiScript executable with the unit testing library
+  # and the script for testing.
+  # It is important to provide the correct environment variables
+  # for relative inclusion paths and finding modules.
+  # The custom empty 'clean' target gets rid of errors
+  # when trying to use the clean command.
   #
-  dd = $directory($d)
-
-  # Loop over all given scripts of the specific directory.
-  #
-  for script: $dd/chai{*}
-  {
-    # Provide custom 'test' targets for each script that
-    # runs the ChaiScript executable with the unit testing library
-    # and the script for testing.
-    # It is important to provide the correct environment variables
-    # for relative inclusion paths and finding modules.
-    # The custom empty 'clean' target gets rid of errors
-    # when trying to use the clean command.
-    #
-    ./: $(script)@$dd/: $unit_test_lib $chaiscript $modules
-    % clean
-    {{
-    }}
-    % test
-    {{
-      diag test $>
-      env \
-        CHAI_USE_PATH="$use_path/" \
-        CHAI_MODULE_PATH="$module_path/" \
-        -- $chaiscript $path($<[0]) $path($>)
-    }}
-  }
+  ./: $(script)@scripts/: $unit_test_lib $chaiscript $modules
+  % clean
+  {{
+  }}
+  % test
+  {{
+    diag test $>
+    env \
+      CHAI_USE_PATH="$use_path/" \
+      CHAI_MODULE_PATH="$module_path/" \
+      -- $chaiscript $path($<[0]) $path($>)
+  }}
 }
-
